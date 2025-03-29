@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fce4ec; /* Rosa claro */
+            font-family: sans-serif;
+        }
+
+        .formulario {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            height: 550px;
+        }
+
+        .formulario h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .formulario input, .formulario select, .formulario button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+
+        .formulario button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .formulario button:hover {
+            background-color: #ad1457;
+        }
+
+        .genero-radio {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .genero-radio label {
+            margin-right: 10px;
+            transition: color 0.3s ease; /* Animación suave */
+        }
+
+        /* Cambiar colores al pasar el mouse */
+        .genero-radio label:hover {
+            cursor: pointer; /* Cambia el cursor a "pointer" */
+        }
+
+        .genero-radio input[value="femenino"]:hover + label,
+        .genero-radio input[value="femenino"] + label:hover {
+            color: pink; /* Femenino: Rosado */
+        }
+
+        .genero-radio input[value="masculino"]:hover + label,
+        .genero-radio input[value="masculino"] + label:hover {
+            color: blue; /* Masculino: Azul */
+        }
+
+        .genero-radio input[value="otro"]:hover + label,
+        .genero-radio input[value="otro"] + label:hover {
+            color: purple; /* Otro: Morado */
+        }
+
+        /* Estilos para la alerta personalizada */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .alerta {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .alerta button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .alerta button:hover {
+            background-color: #ad1457;
+        }
+    </style>
+</head>
+<body>
+    <div class="formulario">
+        <h1>REGISTRARSE</h1>
+        <input type="text" placeholder="Nombres">
+        <input type="text" placeholder="Apellidos">
+        <input type="tel" placeholder="Número de teléfono">
+        <select>
+            <option value="">Selecciona tipo de documento...</option>
+            <option value="opcion1">Cédula de Ciudadanía</option>
+            <option value="opcion2">Tarjeta de Identidad</option>
+            <option value="opcion3">Cédula de Extranjería</option>
+        </select>
+        <input type="text" placeholder="Número de documento">
+        <input type="email" placeholder="Correo electrónico">
+        <input type="date" placeholder="dd/mm/aaaa">
+        <div class="genero-radio">
+            <p>Género:</p>
+            <label>
+                <input type="radio" name="genero" value="femenino"> Femenino
+            </label>
+            <label>
+                <input type="radio" name="genero" value="masculino"> Masculino
+            </label>
+            <label>
+                <input type="radio" name="genero" value="otro"> Otro
+            </label>
+        </div>
+        <button id="mostrarAlerta">ENVIAR</button>
+    </div>
+
+    <div class="overlay" id="miAlerta">
+        <div class="alerta">
+            <p id="alertaMensaje">Por favor completa todos los campos obligatorios.</p>
+            <button id="cerrarAlerta">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        // Obtener elementos
+        const mostrarAlerta = document.getElementById('mostrarAlerta');
+        const cerrarAlerta = document.getElementById('cerrarAlerta');
+        const overlay = document.getElementById('miAlerta');
+        const alertaMensaje = document.getElementById('alertaMensaje');
+
+        mostrarAlerta.addEventListener('click', (event) => {
+            const nombres = document.querySelector('input[placeholder="Nombres"]').value.trim();
+            const apellidos = document.querySelector('input[placeholder="Apellidos"]').value.trim();
+            const telefono = document.querySelector('input[placeholder="Número de teléfono"]').value.trim();
+            const tipoDocumento = document.querySelector('select').value;
+            const numeroDocumento = document.querySelector('input[placeholder="Número de documento"]').value.trim();
+            const email = document.querySelector('input[placeholder="Correo electrónico"]').value.trim();
+            const fecha = document.querySelector('input[type="date"]').value;
+            const genero = document.querySelector('input[name="genero"]:checked');
+
+            if (!nombres || !apellidos || !telefono || !tipoDocumento || !numeroDocumento || !email || !fecha || !genero) {
+                alertaMensaje.textContent = "Por favor completa todos los campos obligatorios.";
+                overlay.style.display = 'flex';
+                event.preventDefault();
+            } else {
+                alertaMensaje.textContent = "Gracias por completar el formulario. Ha sido enviado correctamente.";
+                overlay.style.display = 'flex';
+            }
+        });
+
+        cerrarAlerta.addEventListener('click', () => {
+            overlay.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
