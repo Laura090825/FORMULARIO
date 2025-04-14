@@ -10,11 +10,13 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #fce4ec, #fff1f8); /* Degradado suave en el fondo */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
-            margin: 0; /* Eliminar márgenes por defecto del body */
+            background-image: url('https://i.ytimg.com/vi/Jb-xdE8C6B8/maxresdefault.jpg'); /* bonita tortuga */
+            background-size: c; /* Cubre todo el fondo */
+            background-repeat: repeat; /* No se repite */
+            background-attachment: fixed; /* Se mantiene fija al hacer scroll */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
         }
-
         .formulario {
             background-color: white;
             padding: 40px; /* Aumentar el espacio de relleno */
@@ -22,6 +24,7 @@
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18); /* Sombra más pronunciada y suave */
             width: 450px;
             /* height: 550px; /* La altura puede ajustarse según el contenido */
+            background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco con 70% de opacidad */
         }
 
         .formulario h1 {
@@ -48,6 +51,7 @@
             border-radius: 10px; /* Bordes más redondeados */
             box-sizing: border-box;
             font-size: 16px; /* Tamaño de fuente ligeramente mayor */
+            background-color: rgba(81, 80, 80, 0.5); /* Fondo blanco con 70% de opacidad */
             transition: border-color 0.3s ease; /* Transición suave para el borde al enfocar */
         }
 
@@ -58,7 +62,7 @@
         }
 
         .formulario input::placeholder {
-            color: #aaa; /* Color del placeholder más suave */
+            color: #e3e3e3; /* Color del placeholder más suave */
         }
 
         .formulario select option {
@@ -109,13 +113,13 @@
         .genero-radio p {
             margin-right: 15px;
             font-weight: bold; /* Resaltar la etiqueta "Género" */
-            color: #555;
+            color: #000000;
         }
 
         .genero-radio label {
             margin-right: 25px;
             cursor: pointer;
-            color: #777;
+            color: #000000;
             transition: color 0.3s ease;
         }
 
@@ -128,7 +132,7 @@
             appearance: none; /* Ocultar el radio button predeterminado */
             width: 16px;
             height: 16px;
-            border: 1px solid #ccc;
+            border: 1px solid #2b2929;
             border-radius: 50%;
             vertical-align: middle;
             outline: none;
