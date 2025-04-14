@@ -10,73 +10,145 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #fce4ec; /* Rosa claro */
-            font-family: sans-serif;
+            background: linear-gradient(135deg, #fce4ec, #fff1f8); /* Degradado suave en el fondo */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+            margin: 0; /* Eliminar márgenes por defecto del body */
         }
 
         .formulario {
             background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px; /* Aumentar el espacio de relleno */
+            border-radius: 15px; /* Bordes más redondeados */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18); /* Sombra más pronunciada y suave */
             width: 450px;
-            height: 550px;
+            /* height: 550px; /* La altura puede ajustarse según el contenido */
         }
 
         .formulario h1 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 35px; /* Más espacio debajo del título */
+            color: #e91e63; /* Color del título igual al botón */
+            font-weight: 600; /* Un poco más grueso */
+            letter-spacing: 0.5px; /* Ligeramente espaciado entre letras */
         }
 
-        .formulario input, .formulario select, .formulario button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
+        .input-container {
+            position: relative; /* Para posicionar el icono dentro */
+            margin-bottom: 25px; /* Más espacio entre los contenedores de entrada */
+        }
+
+        .formulario input[type="text"],
+        .formulario input[type="tel"],
+        .formulario input[type="email"],
+        .formulario input[type="date"],
+        .formulario select {
+            width: calc(100% - 30px); /* Ajustar ancho para el icono */
+            padding: 14px 14px 14px 40px; /* Aumentar el padding y espacio para el icono */
+            border: 1px solid #ccc; /* Borde más claro */
+            border-radius: 10px; /* Bordes más redondeados */
             box-sizing: border-box;
+            font-size: 16px; /* Tamaño de fuente ligeramente mayor */
+            transition: border-color 0.3s ease; /* Transición suave para el borde al enfocar */
+        }
+
+        .formulario input:focus,
+        .formulario select:focus {
+            outline: none; /* Eliminar el contorno predeterminado al enfocar */
+            border-color: #e91e63; /* Resaltar el borde al enfocar */
+        }
+
+        .formulario input::placeholder {
+            color: #aaa; /* Color del placeholder más suave */
+        }
+
+        .formulario select option {
+            padding: 10px;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #bbb;
+            font-size: 18px;
         }
 
         .formulario button {
+            width: 100%;
+            padding: 16px; /* Aumentar el padding del botón */
             background-color: #e91e63;
             color: white;
             border: none;
+            border-radius: 10px; /* Bordes redondeados para el botón */
             cursor: pointer;
+            font-size: 18px; /* Tamaño de fuente del botón */
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* Transiciones para hover y clic */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para el botón */
         }
 
         .formulario button:hover {
-            background-color: #ad1457;
+            background-color: #d81b60; /* Ligeramente más oscuro al pasar el mouse */
+            transform: translateY(-2px); /* Ligeramente elevado al pasar el mouse */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .formulario button:active {
+            transform: translateY(0); /* Volver a la posición original al hacer clic */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .genero-radio {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 30px; /* Ajustar margen inferior */
+            padding-left: 10px; /* Añadir un poco de espacio a la izquierda */
+        }
+
+        .genero-radio p {
+            margin-right: 15px;
+            font-weight: bold; /* Resaltar la etiqueta "Género" */
+            color: #555;
         }
 
         .genero-radio label {
-            margin-right: 10px;
-            transition: color 0.3s ease; /* Animación suave */
+            margin-right: 25px;
+            cursor: pointer;
+            color: #777;
+            transition: color 0.3s ease;
         }
 
-        /* Cambiar colores al pasar el mouse */
         .genero-radio label:hover {
-            cursor: pointer; /* Cambia el cursor a "pointer" */
+            color: #333;
         }
 
-        .genero-radio input[value="femenino"]:hover + label,
-        .genero-radio input[value="femenino"] + label:hover {
-            color: pink; /* Femenino: Rosado */
+        .genero-radio input[type="radio"] {
+            margin-right: 8px;
+            appearance: none; /* Ocultar el radio button predeterminado */
+            width: 16px;
+            height: 16px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            vertical-align: middle;
+            outline: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
         }
 
-        .genero-radio input[value="masculino"]:hover + label,
-        .genero-radio input[value="masculino"] + label:hover {
-            color: blue; /* Masculino: Azul */
+        .genero-radio input[type="radio"]:checked {
+            background-color: #e91e63;
+            border-color: #e91e63;
         }
 
-        .genero-radio input[value="otro"]:hover + label,
-        .genero-radio input[value="otro"] + label:hover {
-            color: purple; /* Otro: Morado */
+        .genero-radio input[type="radio"]:checked::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 3px;
         }
 
         /* Estilos para la alerta personalizada */
@@ -94,41 +166,73 @@
 
         .alerta {
             background-color: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 35px; /* Aumentar el padding de la alerta */
+            border-radius: 15px; /* Bordes más redondeados para la alerta */
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para la alerta */
+        }
+
+        .alerta p {
+            margin-bottom: 25px;
+            font-size: 18px; /* Tamaño de fuente del mensaje de alerta */
+            color: #333;
+            line-height: 1.6;
         }
 
         .alerta button {
             background-color: #e91e63;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 14px 30px; /* Ajustar padding del botón de la alerta */
+            border-radius: 8px; /* Bordes redondeados para el botón de la alerta */
             cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
         }
 
         .alerta button:hover {
-            background-color: #ad1457;
+            background-color: #d81b60;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="formulario">
         <h1>REGISTRARSE</h1>
-        <input type="text" placeholder="Nombres">
-        <input type="text" placeholder="Apellidos">
-        <input type="tel" placeholder="Número de teléfono">
-        <select>
-            <option value="">Selecciona tipo de documento...</option>
-            <option value="opcion1">Cédula de Ciudadanía</option>
-            <option value="opcion2">Tarjeta de Identidad</option>
-            <option value="opcion3">Cédula de Extranjería</option>
-        </select>
-        <input type="text" placeholder="Número de documento">
-        <input type="email" placeholder="Correo electrónico">
-        <input type="date" placeholder="dd/mm/aaaa">
+        <div class="input-container">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" placeholder="Nombres">
+        </div>
+        <div class="input-container">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" placeholder="Apellidos">
+        </div>
+        <div class="input-container">
+            <i class="fas fa-phone input-icon"></i>
+            <input type="tel" placeholder="Número de teléfono">
+        </div>
+        <div class="input-container">
+            <i class="fas fa-id-card input-icon"></i>
+            <select>
+                <option value="">Selecciona tipo de documento...</option>
+                <option value="opcion1">Cédula de Ciudadanía</option>
+                <option value="opcion2">Tarjeta de Identidad</option>
+                <option value="opcion3">Cédula de Extranjería</option>
+            </select>
+        </div>
+        <div class="input-container">
+            <i class="far fa-id-card input-icon"></i>
+            <input type="text" placeholder="Número de documento">
+        </div>
+        <div class="input-container">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" placeholder="Correo electrónico">
+        </div>
+        <div class="input-container">
+            <i class="fas fa-calendar-alt input-icon"></i>
+            <input type="date" placeholder="dd/mm/aaaa">
+        </div>
         <div class="genero-radio">
             <p>Género:</p>
             <label>
@@ -175,14 +279,10 @@
             } else {
                 alertaMensaje.textContent = "Gracias por completar el formulario. Ha sido enviado correctamente.";
                 overlay.style.display = 'flex';
-            
-       
 
-       
 
-       
-        const datosRegistro = {
-            
+                const datosRegistro = {
+
 nombres: nombres,
 apellidos: apellidos,
 telefono: telefono,
@@ -190,14 +290,14 @@ tipoDocumento: tipoDocumento,
 numeroDocumento: numeroDocumento,
 email: email,
 fecha: fecha,
-genero: genero.value, 
+genero: genero.value,
 };
 
 
- console.log("Datos del formulario:", datosRegistro);
+console.log("Datos del formulario:", datosRegistro);
             }
         });
- cerrarAlerta.addEventListener('click', () => {
+cerrarAlerta.addEventListener('click', () => {
             overlay.style.display = 'none';
         });
     </script>
