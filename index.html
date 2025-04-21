@@ -11,8 +11,8 @@
             align-items: center;
             min-height: 100vh;
             background-image: url('https://i.ytimg.com/vi/Jb-xdE8C6B8/maxresdefault.jpg'); /* bonita tortuga */
-            background-size: c; /* Cubre todo el fondo */
-            background-repeat: repeat; /* No se repite */
+            background-size: cover; /* Cubre todo el fondo */
+            background-repeat: no-repeat; /* No se repite */
             background-attachment: fixed; /* Se mantiene fija al hacer scroll */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -198,6 +198,54 @@
         .alerta button:hover {
             background-color: #d81b60;
         }
+
+        #contenedor-datos-registrados {
+            margin-top: 20px;
+            border: 0px solid #eee;
+            border-radius: 10px;
+            font-size: 16px;
+            
+        }
+
+        #datos-registrados {
+            padding: 20px;
+            text-align: left; /* Alinea el texto a la izquierda para mejor lectura */
+        }
+
+        #datos-registrados h3 {
+            margin-top: 0;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #datos-registrados p {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        #boton-datos {
+            background-color: #5c70b8; /* Un color verde */
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 0px; /* Espacio superior */
+            display: block;
+            width: fit-content; /* Ajustar al contenido */
+            margin-left: 50px;
+            margin-right: auto;
+            transition: background-color 0.3s ease;
+        }
+
+        #boton-datos:hover {
+            background-color: #054585;
+        }
+
+        .oculto {
+            display: none;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -220,9 +268,9 @@
             <i class="fas fa-id-card input-icon"></i>
             <select>
                 <option value="">Selecciona tipo de documento...</option>
-                <option value="opcion1">Cédula de Ciudadanía</option>
-                <option value="opcion2">Tarjeta de Identidad</option>
-                <option value="opcion3">Cédula de Extranjería</option>
+                <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+                <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                <option value="Cédula de Extranjería">Cédula de Extranjería</option>
             </select>
         </div>
         <div class="input-container">
@@ -252,6 +300,21 @@
         <button id="mostrarAlerta">ENVIAR</button>
     </div>
 
+    <div id="contenedor-datos-registrados">
+        <button id="boton-datos">Mostrar Datos</button>
+        <div id="datos-registrados" class="oculto">
+            <h3>Datos Registrados:</h3>
+            <p id="nombre-registrado"></p>
+            <p id="apellido-registrado"></p>
+            <p id="telefono-registrado"></p>
+            <p id="tipo-documento-registrado"></p>
+            <p id="numero-documento-registrado"></p>
+            <p id="email-registrado"></p>
+            <p id="fecha-registrada"></p>
+            <p id="genero-registrado"></p>
+        </div>
+    </div>
+
     <div class="overlay" id="miAlerta">
         <div class="alerta">
             <p id="alertaMensaje">Por favor completa todos los campos obligatorios.</p>
@@ -260,11 +323,23 @@
     </div>
 
     <script>
-        // Obtener elementos
+        // Obtener elementos del formulario
         const mostrarAlerta = document.getElementById('mostrarAlerta');
         const cerrarAlerta = document.getElementById('cerrarAlerta');
         const overlay = document.getElementById('miAlerta');
         const alertaMensaje = document.getElementById('alertaMensaje');
+
+        // Obtener elementos para mostrar/ocultar datos registrados
+        const contenedorDatosRegistrados = document.getElementById('contenedor-datos-registrados');
+        const botonDatos = document.getElementById('boton-datos');
+        const datosRegistradosDiv = document.getElementById('datos-registrados');
+
+        // Estado inicial: los datos están ocultos
+        datosRegistradosDiv.classList.add('oculto');
+        botonDatos.addEventListener('click', () => {
+            datosRegistradosDiv.classList.toggle('oculto');
+            botonDatos.textContent = datosRegistradosDiv.classList.contains('oculto') ? 'Mostrar Datos' : 'Ocultar Datos';
+        });
 
         mostrarAlerta.addEventListener('click', (event) => {
             const nombres = document.querySelector('input[placeholder="Nombres"]').value.trim();
@@ -284,24 +359,32 @@
                 alertaMensaje.textContent = "Gracias por completar el formulario. Ha sido enviado correctamente.";
                 overlay.style.display = 'flex';
 
-
                 const datosRegistro = {
+                    nombres: nombres,
+                    apellidos: apellidos,
+                    telefono: telefono,
+                    tipoDocumento: tipoDocumento,
+                    numeroDocumento: numeroDocumento,
+                    email: email,
+                    fecha: fecha,
+                    genero: genero.value,
+                };
 
-nombres: nombres,
-apellidos: apellidos,
-telefono: telefono,
-tipoDocumento: tipoDocumento,
-numeroDocumento: numeroDocumento,
-email: email,
-fecha: fecha,
-genero: genero.value,
-};
+                console.log("Datos del formulario:", datosRegistro);
 
-
-console.log("Datos del formulario:", datosRegistro);
+                // Mostrar los datos en la parte inferior
+                document.getElementById('nombre-registrado').textContent = `Nombres: ${datosRegistro.nombres}`;
+                document.getElementById('apellido-registrado').textContent = `Apellidos: ${datosRegistro.apellidos}`;
+                document.getElementById('telefono-registrado').textContent = `Teléfono: ${datosRegistro.telefono}`;
+                document.getElementById('tipo-documento-registrado').textContent = `Tipo de Documento: ${datosRegistro.tipoDocumento}`;
+                document.getElementById('numero-documento-registrado').textContent = `Número de Documento: ${datosRegistro.numeroDocumento}`;
+                document.getElementById('email-registrado').textContent = `Correo Electrónico: ${datosRegistro.email}`;
+                document.getElementById('fecha-registrada').textContent = `Fecha de Nacimiento: ${datosRegistro.fecha}`;
+                document.getElementById('genero-registrado').textContent = `Género: ${datosRegistro}`;
             }
         });
-cerrarAlerta.addEventListener('click', () => {
+
+        cerrarAlerta.addEventListener('click', () => {
             overlay.style.display = 'none';
         });
     </script>
