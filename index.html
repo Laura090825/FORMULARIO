@@ -210,17 +210,18 @@
         #datos-registrados {
             padding: 20px;
             text-align: left; /* Alinea el texto a la izquierda para mejor lectura */
+            background-color: rgba(81, 80, 80, 0.5);
         }
 
         #datos-registrados h3 {
             margin-top: 0;
-            color: #333;
+            color: white;
             margin-bottom: 10px;
         }
 
         #datos-registrados p {
             margin-bottom: 8px;
-            color: #555;
+            color: white;
         }
 
         #boton-datos {
@@ -380,7 +381,7 @@
                 document.getElementById('numero-documento-registrado').textContent = `Número de Documento: ${datosRegistro.numeroDocumento}`;
                 document.getElementById('email-registrado').textContent = `Correo Electrónico: ${datosRegistro.email}`;
                 document.getElementById('fecha-registrada').textContent = `Fecha de Nacimiento: ${datosRegistro.fecha}`;
-                document.getElementById('genero-registrado').textContent = `Género: ${datosRegistro}`;
+                document.getElementById('genero-registrado').textContent = `Género: ${datosRegistro.genero}`;
             }
         });
 
