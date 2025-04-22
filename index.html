@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,37 +8,57 @@
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            /* Cambiamos a columna para el formulario y los datos */
+            justify-content: flex-start;
+            /* Alineamos al inicio para que el formulario esté arriba */
             align-items: center;
             min-height: 100vh;
-            background-image: url('https://i.ytimg.com/vi/Jb-xdE8C6B8/maxresdefault.jpg'); /* bonita tortuga */
-            background-size: cover; /* Cubre todo el fondo */
-            background-repeat: no-repeat; /* No se repite */
-            background-attachment: fixed; /* Se mantiene fija al hacer scroll */
+            background-image: url('https://i.ytimg.com/vi/Jb-xdE8C6B8/maxresdefault.jpg');
+            /* bonita tortuga */
+            background-size: cover;
+            /* Cubre todo el fondo */
+            background-repeat: no-repeat;
+            /* No se repite */
+            background-attachment: fixed;
+            /* Se mantiene fija al hacer scroll */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
+            margin: 20px 0;
+            /* Añadimos un poco de margen superior e inferior */
         }
+
         .formulario {
             background-color: white;
-            padding: 40px; /* Aumentar el espacio de relleno */
-            border-radius: 15px; /* Bordes más redondeados */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18); /* Sombra más pronunciada y suave */
+            padding: 40px;
+            /* Aumentar el espacio de relleno */
+            border-radius: 15px;
+            /* Bordes más redondeados */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+            /* Sombra más pronunciada y suave */
             width: 450px;
-            /* height: 550px; /* La altura puede ajustarse según el contenido */
-            background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco con 70% de opacidad */
+            background-color: rgba(255, 255, 255, 0.2);
+            /* Fondo blanco con 70% de opacidad */
+            margin-bottom: 30px;
+            /* Espacio entre el formulario y la tabla de datos */
         }
 
         .formulario h1 {
             text-align: center;
-            margin-bottom: 35px; /* Más espacio debajo del título */
-            color: #e91e63; /* Color del título igual al botón */
-            font-weight: 600; /* Un poco más grueso */
-            letter-spacing: 0.5px; /* Ligeramente espaciado entre letras */
+            margin-bottom: 35px;
+            /* Más espacio debajo del título */
+            color: #e91e63;
+            /* Color del título igual al botón */
+            font-weight: 600;
+            /* Un poco más grueso */
+            letter-spacing: 0.5px;
+            /* Ligeramente espaciado entre letras */
         }
 
         .input-container {
-            position: relative; /* Para posicionar el icono dentro */
-            margin-bottom: 25px; /* Más espacio entre los contenedores de entrada */
+            position: relative;
+            /* Para posicionar el icono dentro */
+            margin-bottom: 25px;
+            /* Más espacio entre los contenedores de entrada */
         }
 
         .formulario input[type="text"],
@@ -45,24 +66,34 @@
         .formulario input[type="email"],
         .formulario input[type="date"],
         .formulario select {
-            width: calc(100% - 30px); /* Ajustar ancho para el icono */
-            padding: 14px 14px 14px 40px; /* Aumentar el padding y espacio para el icono */
-            border: 1px solid #ccc; /* Borde más claro */
-            border-radius: 10px; /* Bordes más redondeados */
+            width: calc(100% - 30px);
+            /* Ajustar ancho para el icono */
+            padding: 14px 14px 14px 40px;
+            /* Aumentar el padding y espacio para el icono */
+            border: 1px solid #ccc;
+            /* Borde más claro */
+            border-radius: 10px;
+            /* Bordes más redondeados */
             box-sizing: border-box;
-            font-size: 16px; /* Tamaño de fuente ligeramente mayor */
-            background-color: rgba(81, 80, 80, 0.5); /* Fondo blanco con 70% de opacidad */
-            transition: border-color 0.3s ease; /* Transición suave para el borde al enfocar */
+            font-size: 16px;
+            /* Tamaño de fuente ligeramente mayor */
+            background-color: rgba(81, 80, 80, 0.5);
+            /* Fondo blanco con 70% de opacidad */
+            transition: border-color 0.3s ease;
+            /* Transición suave para el borde al enfocar */
         }
 
         .formulario input:focus,
         .formulario select:focus {
-            outline: none; /* Eliminar el contorno predeterminado al enfocar */
-            border-color: #e91e63; /* Resaltar el borde al enfocar */
+            outline: none;
+            /* Eliminar el contorno predeterminado al enfocar */
+            border-color: #e91e63;
+            /* Resaltar el borde al enfocar */
         }
 
         .formulario input::placeholder {
-            color: #e3e3e3; /* Color del placeholder más suave */
+            color: #e3e3e3;
+            /* Color del placeholder más suave */
         }
 
         .formulario select option {
@@ -80,39 +111,50 @@
 
         .formulario button {
             width: 100%;
-            padding: 16px; /* Aumentar el padding del botón */
+            padding: 16px;
+            /* Aumentar el padding del botón */
             background-color: #e91e63;
             color: white;
             border: none;
-            border-radius: 10px; /* Bordes redondeados para el botón */
+            border-radius: 10px;
+            /* Bordes redondeados para el botón */
             cursor: pointer;
-            font-size: 18px; /* Tamaño de fuente del botón */
+            font-size: 18px;
+            /* Tamaño de fuente del botón */
             font-weight: 500;
-            transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* Transiciones para hover y clic */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave para el botón */
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+            /* Transiciones para hover y clic */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Sombra suave para el botón */
         }
 
         .formulario button:hover {
-            background-color: #d81b60; /* Ligeramente más oscuro al pasar el mouse */
-            transform: translateY(-2px); /* Ligeramente elevado al pasar el mouse */
+            background-color: #d81b60;
+            /* Ligeramente más oscuro al pasar el mouse */
+            transform: translateY(-2px);
+            /* Ligeramente elevado al pasar el mouse */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
         .formulario button:active {
-            transform: translateY(0); /* Volver a la posición original al hacer clic */
+            transform: translateY(0);
+            /* Volver a la posición original al hacer clic */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .genero-radio {
             display: flex;
             align-items: center;
-            margin-bottom: 30px; /* Ajustar margen inferior */
-            padding-left: 10px; /* Añadir un poco de espacio a la izquierda */
+            margin-bottom: 30px;
+            /* Ajustar margen inferior */
+            padding-left: 10px;
+            /* Añadir un poco de espacio a la izquierda */
         }
 
         .genero-radio p {
             margin-right: 15px;
-            font-weight: bold; /* Resaltar la etiqueta "Género" */
+            font-weight: bold;
+            /* Resaltar la etiqueta "Género" */
             color: #000000;
         }
 
@@ -129,7 +171,8 @@
 
         .genero-radio input[type="radio"] {
             margin-right: 8px;
-            appearance: none; /* Ocultar el radio button predeterminado */
+            appearance: none;
+            /* Ocultar el radio button predeterminado */
             width: 16px;
             height: 16px;
             border: 1px solid #2b2929;
@@ -170,15 +213,19 @@
 
         .alerta {
             background-color: white;
-            padding: 35px; /* Aumentar el padding de la alerta */
-            border-radius: 15px; /* Bordes más redondeados para la alerta */
+            padding: 35px;
+            /* Aumentar el padding de la alerta */
+            border-radius: 15px;
+            /* Bordes más redondeados para la alerta */
             text-align: center;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para la alerta */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            /* Sombra más pronunciada para la alerta */
         }
 
         .alerta p {
             margin-bottom: 25px;
-            font-size: 18px; /* Tamaño de fuente del mensaje de alerta */
+            font-size: 18px;
+            /* Tamaño de fuente del mensaje de alerta */
             color: #333;
             line-height: 1.6;
         }
@@ -187,8 +234,10 @@
             background-color: #e91e63;
             color: white;
             border: none;
-            padding: 14px 30px; /* Ajustar padding del botón de la alerta */
-            border-radius: 8px; /* Bordes redondeados para el botón de la alerta */
+            padding: 14px 30px;
+            /* Ajustar padding del botón de la alerta */
+            border-radius: 8px;
+            /* Bordes redondeados para el botón de la alerta */
             cursor: pointer;
             font-size: 16px;
             font-weight: 500;
@@ -199,75 +248,75 @@
             background-color: #d81b60;
         }
 
-        #contenedor-datos-registrados {
+        #contenedor-tabla-datos {
+            width: 100%;
+            /* Ocupa todo el ancho disponible */
+            max-width: 1050px;
+            /* Ancho máximo para evitar que sea demasiado ancho */
+            overflow-x: auto;
+            /* Permite desplazamiento horizontal si la tabla es muy ancha */
             margin-top: 20px;
-            border: 0px solid #eee;
+        }
+
+
+        #tabla-datos {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            /* Fondo semitransparente para la tabla */
             border-radius: 10px;
-            font-size: 16px;
-            
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        #datos-registrados {
-            padding: 20px;
-            text-align: left; /* Alinea el texto a la izquierda para mejor lectura */
-            background-color: rgba(81, 80, 80, 0.5);
+        #tabla-datos th,
+        #tabla-datos td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            color: #333;
         }
 
-        #datos-registrados h3 {
-            margin-top: 0;
-            color: white;
-            margin-bottom: 10px;
+        #tabla-datos th {
+            background-color: #f2f2f2;
+            font-weight: bold;
         }
 
-        #datos-registrados p {
-            margin-bottom: 8px;
-            color: white;
-        }
-
-        #boton-datos {
-            background-color: #5c70b8; /* Un color verde */
-            color: rgb(255, 255, 255);
+        .eliminar-fila {
+            background: none;
+            color: red;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 5px;
             cursor: pointer;
-            font-size: 14px;
-            margin-top: 0px; /* Espacio superior */
-            display: block;
-            width: fit-content; /* Ajustar al contenido */
-            margin-left: 50px;
-            margin-right: auto;
-            transition: background-color 0.3s ease;
+            font-size: 16px;
+            line-height: 1;
         }
 
-        #boton-datos:hover {
-            background-color: #054585;
-        }
-
-        .oculto {
-            display: none;
+        .eliminar-fila:hover {
+            color: darkred;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <div class="formulario">
         <h1>REGISTRARSE</h1>
         <div class="input-container">
             <i class="fas fa-user input-icon"></i>
-            <input type="text" placeholder="Nombres">
+            <input type="text" placeholder="Nombres" id="nombres">
         </div>
         <div class="input-container">
             <i class="fas fa-user input-icon"></i>
-            <input type="text" placeholder="Apellidos">
+            <input type="text" placeholder="Apellidos" id="apellidos">
         </div>
         <div class="input-container">
             <i class="fas fa-phone input-icon"></i>
-            <input type="tel" placeholder="Número de teléfono">
+            <input type="tel" placeholder="Número de teléfono" id="telefono">
         </div>
         <div class="input-container">
             <i class="fas fa-id-card input-icon"></i>
-            <select>
+            <select id="tipoDocumento">
                 <option value="">Selecciona tipo de documento...</option>
                 <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
                 <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
@@ -276,44 +325,50 @@
         </div>
         <div class="input-container">
             <i class="far fa-id-card input-icon"></i>
-            <input type="text" placeholder="Número de documento">
+            <input type="text" placeholder="Número de documento" id="numeroDocumento">
         </div>
         <div class="input-container">
             <i class="fas fa-envelope input-icon"></i>
-            <input type="email" placeholder="Correo electrónico">
+            <input type="email" placeholder="Correo electrónico" id="email">
         </div>
         <div class="input-container">
             <i class="fas fa-calendar-alt input-icon"></i>
-            <input type="date" placeholder="dd/mm/aaaa">
+            <input type="date" placeholder="dd/mm/aaaa" id="fechaNacimiento">
         </div>
         <div class="genero-radio">
             <p>Género:</p>
             <label>
-                <input type="radio" name="genero" value="femenino"> Femenino
+                <input type="radio" name="genero" value="femenino" id="generoFemenino"> Femenino
             </label>
             <label>
-                <input type="radio" name="genero" value="masculino"> Masculino
+                <input type="radio" name="genero" value="masculino" id="generoMasculino"> Masculino
             </label>
             <label>
-                <input type="radio" name="genero" value="otro"> Otro
+                <input type="radio" name="genero" value="otro" id="generoOtro"> Otro
             </label>
         </div>
-        <button id="mostrarAlerta">ENVIAR</button>
+        <button id="enviarFormulario">ENVIAR</button>
     </div>
 
-    <div id="contenedor-datos-registrados">
-        <button id="boton-datos">Mostrar Datos</button>
-        <div id="datos-registrados" class="oculto">
-            <h3>Datos Registrados:</h3>
-            <p id="nombre-registrado"></p>
-            <p id="apellido-registrado"></p>
-            <p id="telefono-registrado"></p>
-            <p id="tipo-documento-registrado"></p>
-            <p id="numero-documento-registrado"></p>
-            <p id="email-registrado"></p>
-            <p id="fecha-registrada"></p>
-            <p id="genero-registrado"></p>
-        </div>
+    <div id="contenedor-tabla-datos">
+        <h2 style="color: white;">Datos Registrados</h2>
+        <table id="tabla-datos">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Tipo de Documento</th>
+                    <th>Número de Documento</th>
+                    <th>Correo Electrónico</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Género</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
 
     <div class="overlay" id="miAlerta">
@@ -325,63 +380,75 @@
 
     <script>
         // Obtener elementos del formulario
-        const mostrarAlerta = document.getElementById('mostrarAlerta');
+        const enviarFormulario = document.getElementById('enviarFormulario');
         const cerrarAlerta = document.getElementById('cerrarAlerta');
         const overlay = document.getElementById('miAlerta');
         const alertaMensaje = document.getElementById('alertaMensaje');
+        const tablaDatosBody = document.querySelector('#tabla-datos tbody');
 
-        // Obtener elementos para mostrar/ocultar datos registrados
-        const contenedorDatosRegistrados = document.getElementById('contenedor-datos-registrados');
-        const botonDatos = document.getElementById('boton-datos');
-        const datosRegistradosDiv = document.getElementById('datos-registrados');
+        enviarFormulario.addEventListener('click', (event) => {
+            const nombres = document.getElementById('nombres').value.trim();
+            const apellidos = document.getElementById('apellidos').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const tipoDocumento = document.getElementById('tipoDocumento').value;
+            const numeroDocumento = document.getElementById('numeroDocumento').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+            const generoSeleccionado = document.querySelector('input[name="genero"]:checked');
+            const genero = generoSeleccionado ? generoSeleccionado.value : '';
 
-        // Estado inicial: los datos están ocultos
-        datosRegistradosDiv.classList.add('oculto');
-        botonDatos.addEventListener('click', () => {
-            datosRegistradosDiv.classList.toggle('oculto');
-            botonDatos.textContent = datosRegistradosDiv.classList.contains('oculto') ? 'Mostrar Datos' : 'Ocultar Datos';
-        });
-
-        mostrarAlerta.addEventListener('click', (event) => {
-            const nombres = document.querySelector('input[placeholder="Nombres"]').value.trim();
-            const apellidos = document.querySelector('input[placeholder="Apellidos"]').value.trim();
-            const telefono = document.querySelector('input[placeholder="Número de teléfono"]').value.trim();
-            const tipoDocumento = document.querySelector('select').value;
-            const numeroDocumento = document.querySelector('input[placeholder="Número de documento"]').value.trim();
-            const email = document.querySelector('input[placeholder="Correo electrónico"]').value.trim();
-            const fecha = document.querySelector('input[type="date"]').value;
-            const genero = document.querySelector('input[name="genero"]:checked');
-
-            if (!nombres || !apellidos || !telefono || !tipoDocumento || !numeroDocumento || !email || !fecha || !genero) {
+            if (!nombres || !apellidos || !telefono || !tipoDocumento || !numeroDocumento || !email || !fechaNacimiento || !genero) {
                 alertaMensaje.textContent = "Por favor completa todos los campos obligatorios.";
                 overlay.style.display = 'flex';
                 event.preventDefault();
             } else {
                 alertaMensaje.textContent = "Gracias por completar el formulario. Ha sido enviado correctamente.";
                 overlay.style.display = 'flex';
+                event.preventDefault();
 
-                const datosRegistro = {
+                const nuevoRegistro = {
                     nombres: nombres,
                     apellidos: apellidos,
                     telefono: telefono,
                     tipoDocumento: tipoDocumento,
                     numeroDocumento: numeroDocumento,
                     email: email,
-                    fecha: fecha,
-                    genero: genero.value,
+                    fechaNacimiento: fechaNacimiento,
+                    genero: genero,
                 };
 
-                console.log("Datos del formulario:", datosRegistro);
+                console.log("Datos del formulario:", nuevoRegistro);
 
-                // Mostrar los datos en la parte inferior
-                document.getElementById('nombre-registrado').textContent = `Nombres: ${datosRegistro.nombres}`;
-                document.getElementById('apellido-registrado').textContent = `Apellidos: ${datosRegistro.apellidos}`;
-                document.getElementById('telefono-registrado').textContent = `Teléfono: ${datosRegistro.telefono}`;
-                document.getElementById('tipo-documento-registrado').textContent = `Tipo de Documento: ${datosRegistro.tipoDocumento}`;
-                document.getElementById('numero-documento-registrado').textContent = `Número de Documento: ${datosRegistro.numeroDocumento}`;
-                document.getElementById('email-registrado').textContent = `Correo Electrónico: ${datosRegistro.email}`;
-                document.getElementById('fecha-registrada').textContent = `Fecha de Nacimiento: ${datosRegistro.fecha}`;
-                document.getElementById('genero-registrado').textContent = `Género: ${datosRegistro.genero}`;
+                // Agregar los datos a la tabla
+                const nuevaFila = tablaDatosBody.insertRow();
+                const celdaNombres = nuevaFila.insertCell();
+                const celdaApellidos = nuevaFila.insertCell();
+                const celdaTelefono = nuevaFila.insertCell();
+                const celdaTipoDocumento = nuevaFila.insertCell();
+                const celdaNumeroDocumento = nuevaFila.insertCell();
+                const celdaEmail = nuevaFila.insertCell();
+                const celdaFechaNacimiento = nuevaFila.insertCell();
+                const celdaGenero = nuevaFila.insertCell();
+                const celdaAcciones = nuevaFila.insertCell();
+
+                celdaNombres.textContent = nuevoRegistro.nombres;
+                celdaApellidos.textContent = nuevoRegistro.apellidos;
+                celdaTelefono.textContent = nuevoRegistro.telefono;
+                celdaTipoDocumento.textContent = nuevoRegistro.tipoDocumento;
+                celdaNumeroDocumento.textContent = nuevoRegistro.numeroDocumento;
+                celdaEmail.textContent = nuevoRegistro.email;
+                celdaFechaNacimiento.textContent = nuevoRegistro.fechaNacimiento;
+                celdaGenero.textContent = nuevoRegistro.genero;
+
+                // Agregar botón de eliminar con evento
+                const botonEliminar = document.createElement('button');
+                botonEliminar.textContent = '❌';
+                botonEliminar.classList.add('eliminar-fila');
+                botonEliminar.addEventListener('click', () => {
+                    tablaDatosBody.removeChild(nuevaFila);
+                });
+                celdaAcciones.appendChild(botonEliminar);
+
             }
         });
 
@@ -390,4 +457,5 @@
         });
     </script>
 </body>
+
 </html>
