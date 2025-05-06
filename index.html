@@ -2,460 +2,406 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Registro</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            /* Cambiamos a columna para el formulario y los datos */
-            justify-content: flex-start;
-            /* Alineamos al inicio para que el formulario esté arriba */
-            align-items: center;
-            min-height: 100vh;
-            background-image: url('https://i.ytimg.com/vi/Jb-xdE8C6B8/maxresdefault.jpg');
-            /* bonita tortuga */
-            background-size: cover;
-            /* Cubre todo el fondo */
-            background-repeat: no-repeat;
-            /* No se repite */
-            background-attachment: fixed;
-            /* Se mantiene fija al hacer scroll */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px 0;
-            /* Añadimos un poco de margen superior e inferior */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Usuarios</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        .formulario {
-            background-color: white;
-            padding: 40px;
-            /* Aumentar el espacio de relleno */
-            border-radius: 15px;
-            /* Bordes más redondeados */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
-            /* Sombra más pronunciada y suave */
-            width: 450px;
-            background-color: rgba(255, 255, 255, 0.2);
-            /* Fondo blanco con 70% de opacidad */
-            margin-bottom: 30px;
-            /* Espacio entre el formulario y la tabla de datos */
-        }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('https://i.ytimg.com/vi/Jb-xdE8C6B8/maxresdefault.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
 
-        .formulario h1 {
-            text-align: center;
-            margin-bottom: 35px;
-            /* Más espacio debajo del título */
-            color: #e91e63;
-            /* Color del título igual al botón */
-            font-weight: 600;
-            /* Un poco más grueso */
-            letter-spacing: 0.5px;
-            /* Ligeramente espaciado entre letras */
-        }
+    #tabla-datos {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
 
-        .input-container {
-            position: relative;
-            /* Para posicionar el icono dentro */
-            margin-bottom: 25px;
-            /* Más espacio entre los contenedores de entrada */
-        }
+    #tabla-datos th,
+    #tabla-datos td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
 
-        .formulario input[type="text"],
-        .formulario input[type="tel"],
-        .formulario input[type="email"],
-        .formulario input[type="date"],
-        .formulario select {
-            width: calc(100% - 30px);
-            /* Ajustar ancho para el icono */
-            padding: 14px 14px 14px 40px;
-            /* Aumentar el padding y espacio para el icono */
-            border: 1px solid #ccc;
-            /* Borde más claro */
-            border-radius: 10px;
-            /* Bordes más redondeados */
-            box-sizing: border-box;
-            font-size: 16px;
-            /* Tamaño de fuente ligeramente mayor */
-            background-color: rgba(81, 80, 80, 0.5);
-            /* Fondo blanco con 70% de opacidad */
-            transition: border-color 0.3s ease;
-            /* Transición suave para el borde al enfocar */
-        }
+    #tabla-datos th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
 
-        .formulario input:focus,
-        .formulario select:focus {
-            outline: none;
-            /* Eliminar el contorno predeterminado al enfocar */
-            border-color: #e91e63;
-            /* Resaltar el borde al enfocar */
-        }
+    .eliminar-fila {
+      background: none;
+      color: red;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-        .formulario input::placeholder {
-            color: #e3e3e3;
-            /* Color del placeholder más suave */
-        }
+    h2 {
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
 
-        .formulario select option {
-            padding: 10px;
-        }
+    #contenedor-tabla-datos {
+      padding: 20px;
+      overflow-x: auto;
+      height: 100vh;
+    }
 
-        .input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #bbb;
-            font-size: 18px;
-        }
+    .btn-registrarse {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #e91e63;
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-        .formulario button {
-            width: 100%;
-            padding: 16px;
-            /* Aumentar el padding del botón */
-            background-color: #e91e63;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            /* Bordes redondeados para el botón */
-            cursor: pointer;
-            font-size: 18px;
-            /* Tamaño de fuente del botón */
-            font-weight: 500;
-            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-            /* Transiciones para hover y clic */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            /* Sombra suave para el botón */
-        }
+    .btn-registrarse:hover {
+      background-color: #d81b60;
+    }
 
-        .formulario button:hover {
-            background-color: #d81b60;
-            /* Ligeramente más oscuro al pasar el mouse */
-            transform: translateY(-2px);
-            /* Ligeramente elevado al pasar el mouse */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
+    .modal {
+      position: fixed;
+      display: none;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+    }
 
-        .formulario button:active {
-            transform: translateY(0);
-            /* Volver a la posición original al hacer clic */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    .formulario {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      width: 470px;
+      max-width: 90%;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
 
-        .genero-radio {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            /* Ajustar margen inferior */
-            padding-left: 10px;
-            /* Añadir un poco de espacio a la izquierda */
-        }
+    .formulario h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #e91e63;
+    }
 
-        .genero-radio p {
-            margin-right: 15px;
-            font-weight: bold;
-            /* Resaltar la etiqueta "Género" */
-            color: #000000;
-        }
+    .input-container {
+      position: relative;
+      margin-bottom: 15px;
+    }
 
-        .genero-radio label {
-            margin-right: 25px;
-            cursor: pointer;
-            color: #000000;
-            transition: color 0.3s ease;
-        }
+    .input-container input,
+    .input-container select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
 
-        .genero-radio label:hover {
-            color: #333;
-        }
+    .genero-radio {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      padding-left: 10px;
+      align-items: center;
+    }
 
-        .genero-radio input[type="radio"] {
-            margin-right: 8px;
-            appearance: none;
-            /* Ocultar el radio button predeterminado */
-            width: 16px;
-            height: 16px;
-            border: 1px solid #2b2929;
-            border-radius: 50%;
-            vertical-align: middle;
-            outline: none;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
+    .formulario button {
+      width: 100%;
+      padding: 12px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-        .genero-radio input[type="radio"]:checked {
-            background-color: #e91e63;
-            border-color: #e91e63;
-        }
+    .formulario button:hover {
+      background-color: #d81b60;
+    }
 
-        .genero-radio input[type="radio"]:checked::before {
-            content: '';
-            display: block;
-            width: 8px;
-            height: 8px;
-            background-color: white;
-            border-radius: 50%;
-            margin: 3px;
-        }
+    .overlay-alerta {
+      position: fixed;
+      display: none;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1001;
+    }
 
-        /* Estilos para la alerta personalizada */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
+    .alerta {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
 
-        .alerta {
-            background-color: white;
-            padding: 35px;
-            /* Aumentar el padding de la alerta */
-            border-radius: 15px;
-            /* Bordes más redondeados para la alerta */
-            text-align: center;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-            /* Sombra más pronunciada para la alerta */
-        }
+    .alerta button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px;
+    }
 
-        .alerta p {
-            margin-bottom: 25px;
-            font-size: 18px;
-            /* Tamaño de fuente del mensaje de alerta */
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .alerta button {
-            background-color: #e91e63;
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            /* Ajustar padding del botón de la alerta */
-            border-radius: 8px;
-            /* Bordes redondeados para el botón de la alerta */
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-
-        .alerta button:hover {
-            background-color: #d81b60;
-        }
-
-        #contenedor-tabla-datos {
-            width: 100%;
-            /* Ocupa todo el ancho disponible */
-            max-width: 1050px;
-            /* Ancho máximo para evitar que sea demasiado ancho */
-            overflow-x: auto;
-            /* Permite desplazamiento horizontal si la tabla es muy ancha */
-            margin-top: 20px;
-        }
-
-
-        #tabla-datos {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            background-color: rgba(255, 255, 255, 0.7);
-            /* Fondo semitransparente para la tabla */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        #tabla-datos th,
-        #tabla-datos td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-            color: #333;
-        }
-
-        #tabla-datos th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-
-        .eliminar-fila {
-            background: none;
-            color: red;
-            border: none;
-            padding: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            line-height: 1;
-        }
-
-        .eliminar-fila:hover {
-            color: darkred;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    .alerta button:hover {
+      background-color: #d81b60;
+    }
+  </style>
 </head>
 
 <body>
+
+  <button class="btn-registrarse" id="abrirFormulario">Registrarse</button>
+
+  <div class="modal" id="modalFormulario">
     <div class="formulario">
-        <h1>REGISTRARSE</h1>
-        <div class="input-container">
-            <i class="fas fa-user input-icon"></i>
-            <input type="text" placeholder="Nombres" id="nombres">
-        </div>
-        <div class="input-container">
-            <i class="fas fa-user input-icon"></i>
-            <input type="text" placeholder="Apellidos" id="apellidos">
-        </div>
-        <div class="input-container">
-            <i class="fas fa-phone input-icon"></i>
-            <input type="tel" placeholder="Número de teléfono" id="telefono">
-        </div>
-        <div class="input-container">
-            <i class="fas fa-id-card input-icon"></i>
-            <select id="tipoDocumento">
-                <option value="">Selecciona tipo de documento...</option>
-                <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
-                <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
-                <option value="Cédula de Extranjería">Cédula de Extranjería</option>
-            </select>
-        </div>
-        <div class="input-container">
-            <i class="far fa-id-card input-icon"></i>
-            <input type="text" placeholder="Número de documento" id="numeroDocumento">
-        </div>
-        <div class="input-container">
-            <i class="fas fa-envelope input-icon"></i>
-            <input type="email" placeholder="Correo electrónico" id="email">
-        </div>
-        <div class="input-container">
-            <i class="fas fa-calendar-alt input-icon"></i>
-            <input type="date" placeholder="dd/mm/aaaa" id="fechaNacimiento">
-        </div>
-        <div class="genero-radio">
-            <p>Género:</p>
-            <label>
-                <input type="radio" name="genero" value="femenino" id="generoFemenino"> Femenino
-            </label>
-            <label>
-                <input type="radio" name="genero" value="masculino" id="generoMasculino"> Masculino
-            </label>
-            <label>
-                <input type="radio" name="genero" value="otro" id="generoOtro"> Otro
-            </label>
-        </div>
-        <button id="enviarFormulario">ENVIAR</button>
+      <h1>REGISTRARSE</h1>
+      <div class="input-container"><input type="text" placeholder="Nombres" id="nombres"></div>
+      <div class="input-container"><input type="text" placeholder="Apellidos" id="apellidos"></div>
+      <div class="input-container"><input type="tel" placeholder="Teléfono" id="telefono"></div>
+      <div class="input-container">
+        <select id="tipoDocumento">
+          <option value="">Tipo de documento</option>
+          <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+          <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+          <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+        </select>
+      </div>
+      <div class="input-container"><input type="text" placeholder="Número de documento" id="numeroDocumento"></div>
+      <div class="input-container"><input type="email" placeholder="Correo electrónico" id="email"></div>
+      <div class="input-container"><input type="date" id="fechaNacimiento"></div>
+      <div class="genero-radio">
+        <h4>Género:</h4>
+        <label><input type="radio" name="genero" value="femenino"> Femenino</label>
+        <label><input type="radio" name="genero" value="masculino"> Masculino</label>
+        <label><input type="radio" name="genero" value="otro"> Otro</label>
+      </div>
+      <button id="enviarFormulario">Enviar</button>
     </div>
+  </div>
 
-    <div id="contenedor-tabla-datos">
-        <h2 style="color: white;">Datos Registrados</h2>
-        <table id="tabla-datos">
-            <thead>
-                <tr>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Teléfono</th>
-                    <th>Tipo de Documento</th>
-                    <th>Número de Documento</th>
-                    <th>Correo Electrónico</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Género</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+  <div id="contenedor-tabla-datos">
+    <h2>Datos Registrados</h2>
+    <table id="tabla-datos">
+      <thead>
+        <tr>
+          <th>Item #</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Teléfono</th>
+          <th>Tipo de Documento</th>
+          <th>Número de Documento</th>
+          <th>Correo Electrónico</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Género</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
-    <div class="overlay" id="miAlerta">
+  <div class="overlay-alerta" id="miAlerta"></div>
+
+  <script>
+    const abrirFormulario = document.getElementById("abrirFormulario");
+    const modalFormulario = document.getElementById("modalFormulario");
+    const enviarFormulario = document.getElementById("enviarFormulario");
+    const alerta = document.getElementById("miAlerta");
+    const tablaDatosBody = document.querySelector("#tabla-datos tbody");
+
+    let filaEditando = null;
+
+    abrirFormulario.onclick = () => {
+      filaEditando = null;
+      modalFormulario.style.display = "flex";
+      document.querySelectorAll("#modalFormulario input, #modalFormulario select").forEach(input => {
+        if (input.type === "radio") input.checked = false;
+        else input.value = "";
+      });
+    };
+
+    window.onclick = (e) => {
+      if (e.target === modalFormulario) {
+        modalFormulario.style.display = "none";
+      }
+    };
+
+    function actualizarNumeracion() {
+      const filas = tablaDatosBody.querySelectorAll("tr");
+      filas.forEach((fila, i) => {
+        fila.cells[0].textContent = i + 1;
+      });
+    }
+
+    enviarFormulario.onclick = (e) => {
+  e.preventDefault();
+
+  const nombres = document.getElementById("nombres").value.trim();
+  const apellidos = document.getElementById("apellidos").value.trim();
+  const telefono = document.getElementById("telefono").value.trim();
+  const tipoDocumento = document.getElementById("tipoDocumento").value;
+  const numeroDocumento = document.getElementById("numeroDocumento").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const fechaNacimiento = document.getElementById("fechaNacimiento").value;
+  const genero = document.querySelector("input[name='genero']:checked")?.value || "";
+
+  const soloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+  const soloNumeros = /^[0-9]{10}$/;
+  const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const hoy = new Date().toISOString().split("T")[0];
+
+  let mensaje = "";
+  if (!nombres || !soloLetras.test(nombres)) mensaje = "Ingresa un nombre válido.";
+  else if (!apellidos || !soloLetras.test(apellidos)) mensaje = "Ingresa un apellido válido.";
+  else if (!telefono || !soloNumeros.test(telefono)) mensaje = "Teléfono inválido. Debe tener 10 dígitos numéricos.";
+  else if (!tipoDocumento) mensaje = "Selecciona tipo de documento.";
+  else if (!numeroDocumento || numeroDocumento.length < 5) mensaje = "Documento inválido.";
+  else if (!email || !correoValido.test(email)) mensaje = "Correo inválido.";
+  else if (!fechaNacimiento || fechaNacimiento > hoy) mensaje = "Fecha de nacimiento inválida.";
+  else if (!genero) mensaje = "Selecciona un género.";
+
+  // Si hay errores, mostrar alerta y detener
+  if (mensaje) {
+    mostrarAlerta(mensaje);
+    return;
+  }
+
+  const datos = [nombres, apellidos, telefono, tipoDocumento, numeroDocumento, email, fechaNacimiento, genero];
+
+  if (filaEditando) {
+    for (let i = 0; i < datos.length; i++) {
+      filaEditando.cells[i + 1].textContent = datos[i];
+    }
+    filaEditando = null;
+  } else {
+    const nuevaFila = tablaDatosBody.insertRow();
+    nuevaFila.insertCell().textContent = tablaDatosBody.rows.length;
+
+    datos.forEach(dato => {
+      const celda = nuevaFila.insertCell();
+      celda.textContent = dato;
+    });
+
+    const celdaAcciones = nuevaFila.insertCell();
+
+    const btnEditar = document.createElement("button");
+    btnEditar.innerHTML = "✏️";
+    btnEditar.className = "eliminar-fila";
+    btnEditar.style.color = "green";
+    btnEditar.style.marginRight = "8px";
+    btnEditar.title = "Editar";
+
+    btnEditar.onclick = () => {
+      const celdas = nuevaFila.querySelectorAll("td");
+      document.getElementById("nombres").value = celdas[1].textContent;
+      document.getElementById("apellidos").value = celdas[2].textContent;
+      document.getElementById("telefono").value = celdas[3].textContent;
+      document.getElementById("tipoDocumento").value = celdas[4].textContent;
+      document.getElementById("numeroDocumento").value = celdas[5].textContent;
+      document.getElementById("email").value = celdas[6].textContent;
+      document.getElementById("fechaNacimiento").value = celdas[7].textContent;
+      document.querySelectorAll("input[name='genero']").forEach(radio => {
+        radio.checked = radio.value === celdas[8].textContent;
+      });
+
+      filaEditando = nuevaFila;
+      modalFormulario.style.display = "flex";
+    };
+
+    celdaAcciones.appendChild(btnEditar);
+
+    const btnEliminar = document.createElement("button");
+    btnEliminar.textContent = "❌";
+    btnEliminar.className = "eliminar-fila";
+    btnEliminar.title = "Eliminar";
+
+    btnEliminar.onclick = () => {
+      mostrarConfirmacionEliminar(nuevaFila);
+    };
+
+    celdaAcciones.appendChild(btnEliminar);
+  }
+
+  modalFormulario.style.display = "none";
+  document.querySelectorAll("#modalFormulario input, #modalFormulario select").forEach(input => {
+    if (input.type === "radio") input.checked = false;
+    else input.value = "";
+  });
+
+  actualizarNumeracion();
+  mostrarAlerta("Formulario enviado correctamente.");
+};
+
+
+    function mostrarAlerta(mensaje) {
+      alerta.innerHTML = `
         <div class="alerta">
-            <p id="alertaMensaje">Por favor completa todos los campos obligatorios.</p>
-            <button id="cerrarAlerta">Cerrar</button>
+          <p>${mensaje}</p>
+          <button onclick="document.getElementById('miAlerta').style.display='none'">Cerrar</button>
         </div>
-    </div>
+      `;
+      alerta.style.display = "flex";
+    }
 
-    <script>
-        // Obtener elementos del formulario
-        const enviarFormulario = document.getElementById('enviarFormulario');
-        const cerrarAlerta = document.getElementById('cerrarAlerta');
-        const overlay = document.getElementById('miAlerta');
-        const alertaMensaje = document.getElementById('alertaMensaje');
-        const tablaDatosBody = document.querySelector('#tabla-datos tbody');
+    let filaParaEliminar = null;
 
-        enviarFormulario.addEventListener('click', (event) => {
-            const nombres = document.getElementById('nombres').value.trim();
-            const apellidos = document.getElementById('apellidos').value.trim();
-            const telefono = document.getElementById('telefono').value.trim();
-            const tipoDocumento = document.getElementById('tipoDocumento').value;
-            const numeroDocumento = document.getElementById('numeroDocumento').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const fechaNacimiento = document.getElementById('fechaNacimiento').value;
-            const generoSeleccionado = document.querySelector('input[name="genero"]:checked');
-            const genero = generoSeleccionado ? generoSeleccionado.value : '';
+    function mostrarConfirmacionEliminar(fila) {
+      filaParaEliminar = fila;
+      alerta.innerHTML = `
+        <div class="alerta">
+          <p>¿Estás seguro de eliminar este registro?</p>
+          <button id="confirmarEliminar">Aceptar</button>
+          <button id="cancelarEliminar">Cancelar</button>
+        </div>
+      `;
+      alerta.style.display = "flex";
 
-            if (!nombres || !apellidos || !telefono || !tipoDocumento || !numeroDocumento || !email || !fechaNacimiento || !genero) {
-                alertaMensaje.textContent = "Por favor completa todos los campos obligatorios.";
-                overlay.style.display = 'flex';
-                event.preventDefault();
-            } else {
-                alertaMensaje.textContent = "Gracias por completar el formulario. Ha sido enviado correctamente.";
-                overlay.style.display = 'flex';
-                event.preventDefault();
+      document.getElementById("confirmarEliminar").onclick = () => {
+        if (filaParaEliminar) {
+          filaParaEliminar.remove();
+          actualizarNumeracion();
+          filaParaEliminar = null;
+        }
+        alerta.style.display = "none";
+      };
 
-                const nuevoRegistro = {
-                    nombres: nombres,
-                    apellidos: apellidos,
-                    telefono: telefono,
-                    tipoDocumento: tipoDocumento,
-                    numeroDocumento: numeroDocumento,
-                    email: email,
-                    fechaNacimiento: fechaNacimiento,
-                    genero: genero,
-                };
-
-                console.log("Datos del formulario:", nuevoRegistro);
-
-                // Agregar los datos a la tabla
-                const nuevaFila = tablaDatosBody.insertRow();
-                const celdaNombres = nuevaFila.insertCell();
-                const celdaApellidos = nuevaFila.insertCell();
-                const celdaTelefono = nuevaFila.insertCell();
-                const celdaTipoDocumento = nuevaFila.insertCell();
-                const celdaNumeroDocumento = nuevaFila.insertCell();
-                const celdaEmail = nuevaFila.insertCell();
-                const celdaFechaNacimiento = nuevaFila.insertCell();
-                const celdaGenero = nuevaFila.insertCell();
-                const celdaAcciones = nuevaFila.insertCell();
-
-                celdaNombres.textContent = nuevoRegistro.nombres;
-                celdaApellidos.textContent = nuevoRegistro.apellidos;
-                celdaTelefono.textContent = nuevoRegistro.telefono;
-                celdaTipoDocumento.textContent = nuevoRegistro.tipoDocumento;
-                celdaNumeroDocumento.textContent = nuevoRegistro.numeroDocumento;
-                celdaEmail.textContent = nuevoRegistro.email;
-                celdaFechaNacimiento.textContent = nuevoRegistro.fechaNacimiento;
-                celdaGenero.textContent = nuevoRegistro.genero;
-
-                // Agregar botón de eliminar con evento
-                const botonEliminar = document.createElement('button');
-                botonEliminar.textContent = '❌';
-                botonEliminar.classList.add('eliminar-fila');
-                botonEliminar.addEventListener('click', () => {
-                    tablaDatosBody.removeChild(nuevaFila);
-                });
-                celdaAcciones.appendChild(botonEliminar);
-
-            }
-        });
-
-        cerrarAlerta.addEventListener('click', () => {
-            overlay.style.display = 'none';
-        });
-    </script>
+      document.getElementById("cancelarEliminar").onclick = () => {
+        filaParaEliminar = null;
+        alerta.style.display = "none";
+      };
+    }
+  </script>
 </body>
 
 </html>
