@@ -7,176 +7,212 @@
   <title>Registro de Usuarios</title>
   <style>
     * {
-      box-sizing: border-box;
+     box-sizing: border-box;
     }
-
+ 
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-image: url('https://i.ytimg.com/vi/Jb-xdE8C6B8/maxresdefault.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
+     margin: 0;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     background-image: url('https://i.ytimg.com/vi/Jb-xdE8C6B8/maxresdefault.jpg');
+     background-size: cover;
+     background-attachment: fixed;
+     background-repeat: no-repeat;
     }
-
+ 
+    h2 {
+     color: white;
+     padding: 20px;
+     margin: 0;
+    }
+ 
+    #contenedor-tabla-datos {
+     padding: 15px; /* Reducir un poco el padding del contenedor */
+     overflow-x: auto;
+     height: auto; /* Ajustar la altura automáticamente */
+    }
+ 
     #tabla-datos {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: rgba(255, 255, 255, 0.9);
+     width: 100%;
+     border-collapse: collapse;
+     background-color: rgba(255, 255, 255, 0.9);
     }
-
+ 
     #tabla-datos th,
     #tabla-datos td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
+     border: 1px solid #ddd;
+     padding: 8px; /* Reducir el padding de las celdas */
+     text-align: left;
+     font-size: 12px; /* Reducir el tamaño de la fuente de la tabla */
+     white-space: nowrap; /* Evitar el salto de línea forzado */
     }
-
+ 
     #tabla-datos th {
-      background-color: #f2f2f2;
-      font-weight: bold;
+     background-color: #f2f2f2;
+     font-weight: bold;
     }
-
+ 
     .eliminar-fila {
-      background: none;
-      color: red;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
+     background: none;
+     color: red;
+     border: none;
+     cursor: pointer;
+     font-size: 14px; /* Reducir el tamaño del botón eliminar */
     }
-
-    h2 {
-      color: white;
-      padding: 20px;
-      margin: 0;
-    }
-
-    #contenedor-tabla-datos {
-      padding: 20px;
-      overflow-x: auto;
-      height: 100vh;
-    }
-
+ 
     .btn-registrarse {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #e91e63;
-      color: white;
-      padding: 14px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      z-index: 1000;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     position: fixed;
+     top: 10px; /* Ajustar la posición */
+     right: 10px; /* Ajustar la posición */
+     background-color: #e91e63;
+     color: white;
+     padding: 10px 15px; /* Reducir el padding del botón */
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     font-size: 14px; /* Reducir el tamaño de la fuente del botón */
+     z-index: 1000;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-
+ 
     .btn-registrarse:hover {
-      background-color: #d81b60;
+     background-color: #d81b60;
     }
-
+ 
     .modal {
-      position: fixed;
-      display: none;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 999;
+     position: fixed;
+     display: none;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     justify-content: center;
+     align-items: center;
+     background: rgba(0, 0, 0, 0.6);
+     z-index: 999;
     }
-
+ 
     .formulario {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 12px;
-      width: 470px;
-      max-width: 90%;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+     background-color: rgba(255, 255, 255, 0.95);
+     padding: 15px; /* Reducir el padding del formulario */
+     border-radius: 12px;
+     width: 95%; /* Ocupar un poco más de ancho */
+     max-width: 450px; /* Reducir el ancho máximo */
+     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
-
+ 
     .formulario h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #e91e63;
+     text-align: center;
+     margin-bottom: 10px; /* Reducir el margen del título */
+     color: #e91e63;
+     font-size: 20px; /* Reducir el tamaño del título */
     }
-
+ 
     .input-container {
-      position: relative;
-      margin-bottom: 15px;
+     position: relative;
+     margin-bottom: 8px; /* Reducir el margen de los inputs */
     }
-
+ 
     .input-container input,
     .input-container select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
+     width: 100%;
+     padding: 6px; /* Reducir el padding de los inputs */
+     border-radius: 8px;
+     border: 1px solid #ccc;
+     font-size: 12px; /* Reducir el tamaño de la fuente de los inputs */
     }
-
+ 
     .genero-radio {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 30px;
-      padding-left: 10px;
-      align-items: center;
+     display: flex;
+     gap: 5px; /* Reducir el espacio entre radios */
+     margin-bottom: 15px; /* Reducir el margen del radio */
+     padding-left: 5px; /* Reducir el padding del radio */
+     align-items: center;
+     font-size: 12px; /* Reducir el tamaño de la fuente del radio */
     }
-
+ 
+    .genero-radio h4 {
+     margin-right: 3px; /* Reducir el margen del título del género */
+     font-size: 12px; /* Reducir el tamaño de la fuente del título del género */
+    }
+ 
     .formulario button {
-      width: 100%;
-      padding: 12px;
-      background-color: #e91e63;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
+     width: 100%;
+     padding: 8px; /* Reducir el padding del botón del formulario */
+     background-color: #e91e63;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     font-size: 14px; /* Reducir el tamaño de la fuente del botón del formulario */
+     cursor: pointer;
     }
-
+ 
     .formulario button:hover {
-      background-color: #d81b60;
+     background-color: #d81b60;
     }
-
+ 
     .overlay-alerta {
-      position: fixed;
-      display: none;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1001;
+     position: fixed;
+     display: none;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     background: rgba(0, 0, 0, 0.5);
+     justify-content: center;
+     align-items: center;
+     z-index: 1001;
     }
-
+ 
     .alerta {
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+     background-color: white;
+     padding: 15px; /* Reducir el padding de la alerta */
+     border-radius: 10px;
+     text-align: center;
+     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+     font-size: 12px; /* Reducir el tamaño de la fuente de la alerta */
     }
-
+ 
     .alerta button {
-      background-color: #e91e63;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      margin: 10px;
+     background-color: #e91e63;
+     color: white;
+     border: none;
+     padding: 6px 10px; /* Reducir el padding del botón de la alerta */
+     border-radius: 8px;
+     cursor: pointer;
+     font-size: 12px; /* Reducir el tamaño de la fuente del botón de la alerta */
+     margin: 5px; /* Reducir el margen del botón de la alerta */
     }
-
+ 
     .alerta button:hover {
-      background-color: #d81b60;
+     background-color: #d81b60;
     }
-  </style>
+ 
+    /* Media Query para pantallas más pequeñas (ej. tablets) */
+    @media (max-width: 768px) {
+     h2 {
+      font-size: 18px; /* Reducir el tamaño del título principal */
+      padding: 15px;
+     }
+    }
+ 
+    /* Media Query para pantallas aún más pequeñas (ej. móviles) */
+    @media (max-width: 576px) {
+     h2 {
+      font-size: 16px; /* Reducir aún más el tamaño del título principal */
+      padding: 10px;
+     }
+ 
+     #tabla-datos th,
+     #tabla-datos td {
+      padding: 6px; /* Reducir aún más el padding de las celdas */
+      font-size: 10px; /* Reducir aún más el tamaño de la fuente de la tabla */
+     }
+ 
+     .eliminar-fila {
+      font-size: 12px; /* Reducir aún más el tamaño del botón eliminar */
+     }
+    }
+   </style>
 </head>
 
 <body>
